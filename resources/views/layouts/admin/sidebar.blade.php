@@ -52,8 +52,8 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content mt-3">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="{{ Request::path() == '/' ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="{{ route('start') }}">
+            <li class="{{ request()->is('teacher/dashboard') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="{{ route('teacher') }}">
                     <i data-feather="home"></i>
                     <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
                 </a>
@@ -63,16 +63,18 @@
                 <i data-feather="more-horizontal"></i>
             </li>
 
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="#">
+            <li
+                class="{{ request()->is('teacher/surat-masuk') || request()->is('teacher/surat-masuk/*') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="{{ route('suratmasuk.index') }}">
                     <i data-feather="file-text"></i>
-                    <span class="menu-title text-truncate" data-i18n="Surat">Surat</span>
+                    <span class="menu-title text-truncate" data-i18n="Surat">Surat Masuk</span>
                 </a>
             </li>
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="#">
-                    <i data-feather="user"></i>
-                    <span class="menu-title text-truncate" data-i18n="User">User</span>
+            <li
+                class="{{ request()->is('teacher/surat-keluar') || request()->is('teacher/surat-keluar/*') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="{{ route('suratkeluar.index') }}">
+                    <i data-feather="file-text"></i>
+                    <span class="menu-title text-truncate" data-i18n="Surat">Surat Keluar</span>
                 </a>
             </li>
         </ul>

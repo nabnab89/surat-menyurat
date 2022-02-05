@@ -2,6 +2,9 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css') }}/vendors.min.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css') }}/charts/apexcharts.css">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css') }}/extensions/toastr.min.css">
+<!-- BEGIN: Custom CSS-->
+@yield('style')
+<!-- END: Custom CSS-->
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->

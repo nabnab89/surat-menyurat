@@ -1,6 +1,17 @@
-## Surat Menyurat
+# Surat Menyurat
 
 Aplikasi ini dibuat untuk kegiatan surat menyurat
+
+## Fitur
+
+- Auth (Login) **Done**
+- Multilevel **Done**
+
+### Guru
+
+- Read Surat Masuk Guru **Done**
+- Read & Create Surat Keluar Guru **Done**
+- Notifikasi Surat Masuk Baru **Done**
 
 ## Cara Menggunakan
 

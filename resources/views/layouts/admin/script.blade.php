@@ -1,10 +1,10 @@
 <!-- BEGIN: Vendor JS-->
+<script src="{{ asset('assets/vendors/js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js') }}/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset('assets/vendors/js') }}/charts/apexcharts.min.js"></script>
-<script src="{{ asset('assets/vendors/js') }}/extensions/toastr.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
