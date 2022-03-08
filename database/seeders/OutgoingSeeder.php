@@ -20,7 +20,7 @@ class OutgoingSeeder extends Seeder
         ];
 
         $letter = [
-            'http://127.0.0.1:8000/teacher/dashboard',
+            asset('assets/test.pdf'),
         ];
 
         $id_type = [

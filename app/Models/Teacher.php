@@ -26,9 +26,9 @@ class Teacher extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function incoming()
+    public function disposition()
     {
-        return $this->hasMany(Incoming::class, 'id_teacher');
+        return $this->hasMany(Disposition::class, 'id_teacher');
     }
 
     public function outgoing()

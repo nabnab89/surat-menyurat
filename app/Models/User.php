@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class, 'id_user');
     }
+
+    public function headmaster()
+    {
+        return $this->hasOne(Headmaster::class, 'id_user');
+    }
 }

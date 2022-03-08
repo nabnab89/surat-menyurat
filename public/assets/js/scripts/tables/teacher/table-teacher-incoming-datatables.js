@@ -14,14 +14,14 @@ $(document).ready(function () {
             ajax: assetPath,
             columns: [
                 { data: 'responsive_id', name: 'responsive_id' },
-                { data: 'id' },
-                { data: 'id' },
-                { data: 'title' },
-                { data: 'admin.name' },
-                { data: 'type.name' },
-                { data: 'id' },
-                { data: 'letter' },
-                { data: 'status' },
+                { data: 'incoming.id' },
+                { data: 'incoming.id' },
+                { data: 'date' },
+                { data: 'incoming.title' },
+                { data: 'incoming.id' },
+                { data: 'incoming.letter' },
+                { data: 'incoming.status_teacher' },
+                { data: 'incoming.id' },
             ],
             columnDefs: [
                 {
@@ -55,28 +55,28 @@ $(document).ready(function () {
                     visible: false
                 },
                 {
-                    targets: 6,
+                    targets: 5,
                     render: function (data) {
                         return (
                             '<a href="' +
                             read +
                             '/' +
                             data +
-                            '" class="btn btn-primary w-50 waves-effect waves-float waves-light">' +
-                            'Surat' +
+                            '" class="btn btn-primary waves-effect waves-float waves-light" target="_blank">' +
+                            feather.icons['mail'].toSvg({ class: 'font-small-4' }) +
                             '</a>'
                         )
                     }
                 },
                 {
-                    targets: 7,
+                    targets: 6,
                     visible: false
                 },
                 {
                     // Label
-                    targets: -1,
+                    targets: -2,
                     render: function (data, type, full, meta) {
-                        var $status_number = full['status'];
+                        var $status_number = data;
                         var $status = {
                             0: { title: 'Belum Dibaca', class: 'badge-light-warning' },
                             1: { title: 'Sudah Dibaca', class: 'badge-light-success' },
@@ -93,6 +93,25 @@ $(document).ready(function () {
                         );
                     }
                 },
+                {
+                    // Actions
+                    targets: -1,
+                    title: 'Actions',
+                    orderable: false,
+                    render: function (data, type, full, meta) {
+                        console.log(data);
+                        return (
+                            '<div class="d-inline-flex">' +
+                            '</div>' +
+                            '</div>' +
+                            '<a href="" class="item-edit" data-bs-toggle="modal" data-bs-target="#detail' +
+                            data +
+                            '">' +
+                            feather.icons['info'].toSvg({ class: 'font-small-4' }) +
+                            '</a>'
+                        );
+                    }
+                }
             ],
             order: [[2, 'desc']],
             dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',

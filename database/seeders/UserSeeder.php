@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
         $email = [
             'teacher@teacher.com',
             'teacher2@teacher2.com',
+            'headmaster@headmaster.com',
+            'headmaster2@headmaster2.com',
             'admin@admin.com',
             'admin2@admin2.com',
         ];
@@ -25,6 +27,8 @@ class UserSeeder extends Seeder
         $role = [
             '1',
             '1',
+            '2',
+            '2',
             '3',
             '3'
         ];

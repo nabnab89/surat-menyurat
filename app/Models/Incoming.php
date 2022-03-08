@@ -11,11 +11,17 @@ class Incoming extends Model
 
     protected $fillable = [
         'id',
+        'number',
         'title',
+        'letter_number',
+        'letter_date',
+        'detail',
         'letter',
         'id_type',
         'id_admin',
-        'id_teacher',
+        'id_hadmaster',
+        'status',
+        'status_teacher'
     ];
 
     protected $dates = [
@@ -34,8 +40,13 @@ class Incoming extends Model
         return $this->belongsTo(Admin::class, 'id_admin');
     }
 
-    public function teacher()
+    public function headmaster()
     {
-        return $this->belongsTo(Teacher::class, 'id_teacher');
+        return $this->belongsTo(Headmaster::class, 'id_headmaster');
+    }
+
+    public function disposition()
+    {
+        return $this->hasMany(Disposition::class, 'id_incoming');
     }
 }

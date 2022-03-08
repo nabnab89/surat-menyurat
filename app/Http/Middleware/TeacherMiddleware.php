@@ -18,7 +18,7 @@ class TeacherMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role->name != "Teacher") {
-            return redirect()->to('logout');
+            return redirect()->route('end');
         }
         return $next($request);
     }

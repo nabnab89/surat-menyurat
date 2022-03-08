@@ -16,6 +16,7 @@ class Outgoing extends Model
         'id_type',
         'id_admin',
         'id_teacher',
+        'id_headmaster',
         'status',
     ];
 
@@ -38,5 +39,10 @@ class Outgoing extends Model
     public function teacher()
     {
         return $this->belongsTo(Teacher::class, 'id_teacher');
+    }
+
+    public function headmaster()
+    {
+        return $this->belongsTo(Headmaster::class, 'id_headmaster');
     }
 }

@@ -17,11 +17,13 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             TeacherSeeder::class,
+            HeadmasterSeeder::class,
             AdminSeeder::class,
             IncomingTypeSeeder::class,
             IncomingSeeder::class,
             OutgoingTypeSeeder::class,
             OutgoingSeeder::class,
+            DispositionSeeder::class
         ]);
     }
 }

@@ -35,7 +35,6 @@
 @endsection
 
 @section('content')
-
     <!-- Basic table -->
     <section id="basic-datatable">
         <input type="hidden" id="link" value="{{ $data }}" />
@@ -66,7 +65,8 @@
         <!-- Modal to add new record -->
         <div class="modal modal-slide-in fade" id="modals-slide-in">
             <div class="modal-dialog sidebar-sm">
-                <form class="add-new-record modal-content pt-0" action="{{ route('suratkeluar.create') }}" method="POST">
+                <form class="add-new-record modal-content pt-0" action="{{ route('teacher.suratkeluar.create') }}"
+                    method="POST">
                     @csrf
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                     <div class="modal-header mb-1">

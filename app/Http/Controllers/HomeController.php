@@ -28,9 +28,9 @@ class HomeController extends Controller
         if ($role == "Teacher") {
             return redirect()->route('teacher');
         } else if ($role == "Headmaster") {
-            return redirect();
+            return redirect()->route('headmaster');
         } else if ($role == "Admin") {
-            return redirect();
+            return redirect()->route('admin');
         } else if ($role == "Student") {
             return redirect();
         } else {

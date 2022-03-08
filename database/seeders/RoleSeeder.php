@@ -18,7 +18,8 @@ class RoleSeeder extends Seeder
             'Teacher',
             'Headmaster',
             'Admin',
-            'Student',
+            // 'Student',
+            // 'Superadmin'
         ];
 
         foreach ($name as $data) {

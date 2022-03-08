@@ -15,18 +15,11 @@ class IncomingSeeder extends Seeder
     public function run()
     {
         $title = [
-            'Surat ke Bali',
-            'Surat ke Jogja',
-            'Surat ke Surabaya',
-            'Surat ke Jakarta',
-            'Surat ke Dubai',
-            'Surat ke USA',
-            'Surat ke Malang',
-            'Surat ke Sidoarjo',
+            'Pembinaan Sekolah Adiwiyata',
         ];
 
         $letter = [
-            'http://127.0.0.1:8000/teacher/dashboard',
+            asset('assets/test.pdf'),
         ];
 
         $id_type = [
@@ -37,22 +30,38 @@ class IncomingSeeder extends Seeder
             1,
         ];
 
-        $id_teacher = [
+        $id_headmaster = [
             1,
         ];
 
-        $status = [
-            0,
+        $number = [
+            '005/034/405.07.3.23/2022'
+        ];
+        $letter_number = [
+            '005/96/405.23/2022'
+        ];
+        $letter_date = [
+            '2022-02-02'
+        ];
+        $from = [
+            'Pemerintah kab. Ponorogo Dinas Lingkungan Hidup'
+        ];
+        $detail = [
+            'Undangan pembinaan calon sekolah adiwiyata kabupate, calon sekolah adiwiyata provinsi, dan calon sekolah adiwiyata nasional tahun 2022'
         ];
 
         for ($i = 0; $i < count($title); $i++) {
             $user = Incoming::create([
                 'title'             => $title[$i],
+                'number'             => $number[$i],
+                'letter_number'             => $letter_number[$i],
+                'letter_date'             => $letter_date[$i],
+                'from'             => $from[$i],
+                'detail'             => $detail[$i],
                 'letter'            => $letter[0],
                 'id_type'           => $id_type[0],
                 'id_admin'          => $id_admin[0],
-                'id_teacher'        => $id_teacher[0],
-                'status'            => $status[0],
+                'id_headmaster'        => $id_headmaster[0]
             ]);
             $user->save();
         };

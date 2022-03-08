@@ -50,33 +50,103 @@
         </ul>
     </div>
     <div class="shadow-bottom"></div>
-    <div class="main-menu-content mt-3">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="{{ request()->is('teacher/dashboard') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="{{ route('teacher') }}">
-                    <i data-feather="home"></i>
-                    <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
-                </a>
-            </li>
-            <li class=" navigation-header">
-                <span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
-                <i data-feather="more-horizontal"></i>
-            </li>
+    @if ($user->id_role == 1)
+        <div class="main-menu-content mt-3">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class="{{ request()->is('teacher/dashboard') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('teacher') }}">
+                        <i data-feather="home"></i>
+                        <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+                    </a>
+                </li>
+                <li class=" navigation-header">
+                    <span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
 
-            <li
-                class="{{ request()->is('teacher/surat-masuk') || request()->is('teacher/surat-masuk/*') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="{{ route('suratmasuk.index') }}">
-                    <i data-feather="file-text"></i>
-                    <span class="menu-title text-truncate" data-i18n="Surat">Surat Masuk</span>
-                </a>
-            </li>
-            <li
-                class="{{ request()->is('teacher/surat-keluar') || request()->is('teacher/surat-keluar/*') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="{{ route('suratkeluar.index') }}">
-                    <i data-feather="file-text"></i>
-                    <span class="menu-title text-truncate" data-i18n="Surat">Surat Keluar</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+                <li
+                    class="{{ request()->is('teacher/surat-masuk') || request()->is('teacher/surat-masuk/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('teacher.suratmasuk.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Surat Masuk</span>
+                    </a>
+                </li>
+                <li
+                    class="{{ request()->is('teacher/surat-keluar') || request()->is('teacher/surat-keluar/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('teacher.suratkeluar.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Surat Keluar</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
+    @if ($user->id_role == 2)
+        <div class="main-menu-content mt-3">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class="{{ request()->is('headmaster/dashboard') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('headmaster') }}">
+                        <i data-feather="home"></i>
+                        <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+                    </a>
+                </li>
+                <li class=" navigation-header">
+                    <span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+
+                <li
+                    class="{{ request()->is('headmaster/surat-masuk') || request()->is('headmaster/surat-masuk/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('headmaster.suratmasuk.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Surat Masuk</span>
+                    </a>
+                </li>
+                <li
+                    class="{{ request()->is('headmaster/disposisi') || request()->is('headmaster/disposisi/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('headmaster.disposisi.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Disposisi</span>
+                    </a>
+                </li>
+                {{-- <li
+                    class="{{ request()->is('headmaster/surat-keluar') || request()->is('headmaster/surat-keluar/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('headmaster.suratkeluar.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Surat Keluar</span>
+                    </a>
+                </li> --}}
+            </ul>
+        </div>
+    @endif
+    @if ($user->id_role == 3)
+        <div class="main-menu-content mt-3">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin') }}">
+                        <i data-feather="home"></i>
+                        <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+                    </a>
+                </li>
+                <li class=" navigation-header">
+                    <span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
+                    <i data-feather="more-horizontal"></i>
+                </li>
+                <li
+                    class="{{ request()->is('admin/surat-masuk') || request()->is('admin/surat-masuk/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin.suratmasuk.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Surat Masuk</span>
+                    </a>
+                </li>
+                <li
+                    class="{{ request()->is('admin/disposisi') || request()->is('admin/disposisi/*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin.disposisi.index') }}">
+                        <i data-feather="file-text"></i>
+                        <span class="menu-title text-truncate" data-i18n="Surat">Disposisi</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
 </div>

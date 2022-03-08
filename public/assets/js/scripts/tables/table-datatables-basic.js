@@ -167,17 +167,17 @@ $(document).ready(function () {
                         }, 50);
                     }
                 },
-                // {
-                //     text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Add New Record',
-                //     className: 'create-new btn btn-primary',
-                //     attr: {
-                //         'data-bs-toggle': 'modal',
-                //         'data-bs-target': '#modals-slide-in'
-                //     },
-                //     init: function (api, node, config) {
-                //         $(node).removeClass('btn-secondary');
-                //     }
-                // }
+                {
+                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Add New Record',
+                    className: 'create-new btn btn-primary',
+                    attr: {
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#modals-slide-in'
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                    }
+                }
             ],
             responsive: {
                 details: {

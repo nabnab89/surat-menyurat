@@ -64,8 +64,8 @@ $(document).ready(function () {
                             read +
                             '/' +
                             data +
-                            '" class="btn btn-primary w-100 waves-effect waves-float waves-light">' +
-                            'Surat' +
+                            '" class="btn btn-primary w-100 waves-effect waves-float waves-light" targe="_blank">' +
+                            feather.icons['mail'].toSvg({ class: 'font-small-4' }) +
                             '</a>'
                         )
                     }
