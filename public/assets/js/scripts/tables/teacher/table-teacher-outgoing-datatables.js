@@ -3,7 +3,6 @@ $(document).ready(function () {
 
     var dt_basic_table = $('.datatables-basic'),
         assetPath = $('#link').attr('value'),
-        read = $('#read').attr('value'),
         hapus = $('#delete').attr('value');
 
     if (dt_basic_table.length) {
@@ -17,9 +16,9 @@ $(document).ready(function () {
                 { data: 'responsive_id', name: 'responsive_id' },
                 { data: 'id' },
                 { data: 'id' },
-                { data: 'title' },
-                { data: 'admin.name' },
-                { data: 'type.name' },
+                { data: 'date' },
+                { data: 'number' },
+                { data: 'to' },
                 { data: 'id' },
                 { data: 'letter' },
                 { data: 'status' },
@@ -58,13 +57,20 @@ $(document).ready(function () {
                 },
                 {
                     targets: 6,
-                    render: function (data) {
+                    render: function (data, type, full, meta) {
+                        var status = full['status'];
+
+                        if (status == 3) {
+                            read = $('#read').attr('value');
+                        } else {
+                            read = '#';
+                        }
                         return (
                             '<a href="' +
                             read +
                             '/' +
                             data +
-                            '" class="btn btn-primary w-100 waves-effect waves-float waves-light" targe="_blank">' +
+                            '" class="btn btn-primary  waves-effect waves-float waves-light" target="_blank">' +
                             feather.icons['mail'].toSvg({ class: 'font-small-4' }) +
                             '</a>'
                         )
@@ -80,8 +86,11 @@ $(document).ready(function () {
                     render: function (data, type, full, meta) {
                         var $status_number = full['status'];
                         var $status = {
-                            0: { title: 'Belum Dibaca', class: 'badge-light-warning' },
-                            1: { title: 'Sudah Dibaca', class: 'badge-light-success' },
+                            0: { title: 'Belum Diverifikasi', class: 'badge-light-warning' },
+                            1: { title: 'Tidak Terverifikasi', class: 'badge-light-danger' },
+                            2: { title: 'Terverifikasi', class: 'badge-light-success' },
+                            3: { title: 'Disetujui', class: 'badge-light-success' },
+                            4: { title: 'Tidak Disetujui', class: 'badge-light-danger' },
                         };
                         if (typeof $status[$status_number] === 'undefined') {
                             return data;
@@ -101,6 +110,13 @@ $(document).ready(function () {
                     title: 'Actions',
                     orderable: false,
                     render: function (data, type, full, meta) {
+                        var status = full['status'];
+
+                        if (status == 3) {
+                            var url = full['letter'];
+                        } else {
+                            var url = '#';
+                        }
                         return (
                             '<div class="d-inline-flex">' +
                             '<a class="pe-1 dropdown-toggle hide-arrow text-primary" data-bs-toggle="dropdown">' +
@@ -116,8 +132,15 @@ $(document).ready(function () {
                             'Delete</a>' +
                             '</div>' +
                             '</div>' +
-                            '<a href="javascript:;" class="item-edit">' +
-                            feather.icons['edit'].toSvg({ class: 'font-small-4' }) +
+                            '<a href="" class="item-edit pe-1" data-bs-toggle="modal" data-bs-target="#detail' +
+                            data +
+                            '">' +
+                            feather.icons['info'].toSvg({ class: 'font-small-4' }) +
+                            '</a>' +
+                            '<a href="' +
+                            url +
+                            '" class="item-edit" target="_blank">' +
+                            feather.icons['printer'].toSvg({ class: 'font-small-4' }) +
                             '</a>'
                         );
                     }

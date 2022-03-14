@@ -2,11 +2,17 @@
 
 use App\Http\Controllers\Admin\DashboardController as ADashboardController;
 use App\Http\Controllers\Admin\DispositionController as ADispositionController;
+use App\Http\Controllers\Admin\SuratKeluarController as ASuratKeluarController;
 use App\Http\Controllers\Admin\SuratMasukController as ASuratMasukController;
 use App\Http\Controllers\Headmaster\DashboardController as HDashboardController;
 use App\Http\Controllers\Headmaster\DispositionController as HDispositionController;
+use App\Http\Controllers\Headmaster\SuratKeluarController as HSuratKeluarController;
 use App\Http\Controllers\Headmaster\SuratMasukController as HSuratMasukController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Student\DashboardController as SDashboardController;
+use App\Http\Controllers\Student\SuratKeluarController as SSuratKeluarController;
+use App\Http\Controllers\Superadmin\DashboardController as SUDashboardController;
+use App\Http\Controllers\Superadmin\RoleController as SURoleController;
 use App\Http\Controllers\Teacher\DashboardController as TDashboardController;
 use App\Http\Controllers\Teacher\SuratKeluarController as TSuratKeluarController;
 use App\Http\Controllers\Teacher\SuratMasukController as TSuratMasukController;
@@ -70,6 +76,11 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/index', [ADispositionController::class, 'index'])->name('admin.disposisi.index');
                 Route::get('/read/{id}', [ADispositionController::class, 'read'])->name('admin.disposisi.read');
             });
+            Route::prefix('surat-keluar')->group(function () {
+                Route::get('/index', [ASuratKeluarController::class, 'index'])->name('admin.suratkeluar.index');
+                Route::get('/acc/{id}', [ASuratKeluarController::class, 'acc'])->name('admin.suratkeluar.acc');
+                Route::get('/not_acc/{id}', [ASuratKeluarController::class, 'not_acc'])->name('admin.suratkeluar.not_acc');
+            });
         });
     });
     Route::middleware(['headmaster'])->group(function () {
@@ -88,6 +99,33 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/not_acc/{id}', [HDispositionController::class, 'not_acc'])->name('headmaster.disposisi.not_acc');
                 Route::post('/edit/{id}', [HDispositionController::class, 'edit'])->name('headmaster.disposisi.edit');
             });
+
+            Route::prefix('surat-keluar')->group(function () {
+                Route::get('/index', [HSuratKeluarController::class, 'index'])->name('headmaster.suratkeluar.index');
+                Route::get('/acc/{id}', [HSuratKeluarController::class, 'acc'])->name('headmaster.suratkeluar.acc');
+                Route::get('/not_acc/{id}', [HSuratKeluarController::class, 'not_acc'])->name('headmaster.suratkeluar.not_acc');
+            });
+        });
+    });
+    Route::middleware(['student'])->group(function () {
+        Route::prefix('student')->group(function () {
+            Route::get('/dashboard', [SDashboardController::class, 'index'])->name('student');
+
+            Route::prefix('surat-keluar')->group(function () {
+                Route::get('/index', [SSuratKeluarController::class, 'index'])->name('student.suratkeluar.index');
+                Route::get('/read/{id}', [SSuratKeluarController::class, 'read'])->name('student.suratkeluar.read');
+                Route::get('/delete/{id}', [SSuratKeluarController::class, 'delete'])->name('student.suratkeluar.delete');
+                Route::post('/create', [SSuratKeluarController::class, 'create'])->name('student.suratkeluar.create');
+            });
+        });
+    });
+    Route::middleware(['superadmin'])->group(function () {
+        Route::prefix('superadmin')->group(function () {
+            Route::get('/dashboard', [SUDashboardController::class, 'index'])->name('superadmin');
+        });
+        Route::prefix('role')->group(function () {
+            Route::get('/index', [SURoleController::class, 'index'])->name('superadmin.role.index');
+            Route::post('/edit/{id}', [SURoleController::class, 'edit'])->name('superadmin.role.edit');
         });
     });
 });

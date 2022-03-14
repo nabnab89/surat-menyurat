@@ -20,8 +20,8 @@ class AdminSeeder extends Seeder
         ];
 
         $id_user = [
+            '4',
             '5',
-            '6',
         ];
 
         $nip = [

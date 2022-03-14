@@ -30,9 +30,4 @@ class Admin extends Model
     {
         return $this->hasMany(Incoming::class, 'id_admin');
     }
-
-    public function outgoing()
-    {
-        return $this->hasMany(Outgoing::class, 'id_admin');
-    }
 }

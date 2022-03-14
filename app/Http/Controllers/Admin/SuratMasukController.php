@@ -45,7 +45,9 @@ class SuratMasukController extends Controller
             $value->type;
             $value->responsive_id = "";
         }
-        return view('admin.surat_masuk.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete', 'incoming'));
+        $outgoing = Outgoing::all();
+        $count = count($outgoing->where('status', 0));
+        return view('admin.surat_masuk.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete', 'incoming', 'count'));
     }
 
     public function getData(Request $request)

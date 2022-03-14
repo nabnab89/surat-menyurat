@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Disposition;
 use App\Models\Headmaster;
 use App\Models\Incoming;
+use App\Models\Outgoing;
 use App\Models\OutgoingType;
 use App\Models\Role;
 use App\Models\Teacher;
@@ -25,7 +26,9 @@ class DispositionController extends Controller
         $type = OutgoingType::all();
         $headmaster = Headmaster::all();
         $teacher = Teacher::all();
-        return view('admin.disposition.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete'));
+        $outgoing = Outgoing::all();
+        $count = count($outgoing->where('status', 0));
+        return view('admin.disposition.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete', 'count'));
     }
 
     public function getData(Request $request)

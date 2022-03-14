@@ -11,12 +11,13 @@ class Outgoing extends Model
 
     protected $fillable = [
         'id',
-        'title',
+        'detail',
+        'number',
+        'to',
         'letter',
         'id_type',
-        'id_admin',
         'id_teacher',
-        'id_headmaster',
+        'id_student',
         'status',
     ];
 
@@ -31,18 +32,18 @@ class Outgoing extends Model
         return $this->belongsTo(OutgoingType::class, 'id_type');
     }
 
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class, 'id_admin');
-    }
-
     public function teacher()
     {
         return $this->belongsTo(Teacher::class, 'id_teacher');
     }
 
-    public function headmaster()
+    public function student()
     {
-        return $this->belongsTo(Headmaster::class, 'id_headmaster');
+        return $this->belongsTo(Student::class, 'id_student');
+    }
+
+    public function scopeSearch($query, $keywords)
+    {
+        return $query->where('number', 'LIKE', '%' . $keywords . '%');
     }
 }

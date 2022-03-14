@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Headmaster;
 
 use App\Http\Controllers\Controller;
 use App\Models\Incoming;
+use App\Models\Outgoing;
 use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,7 +28,9 @@ class SuratMasukController extends Controller
             $value->date = Carbon::createFromFormat('Y-m-d', $date)->isoFormat('DD MMMM Y');
             $value->letter_date = Carbon::createFromFormat('Y-m-d', $value->letter_date)->isoFormat('DD MMMM Y');
         }
-        return view('headmaster.surat_masuk.index', compact('user', 'data', 'read', 'incoming', 'teacher', 'incomings'));
+        $outgoing = Outgoing::where('status', '>=', 2)->get();
+        $outgoing->count = count($outgoing->where('status', 2));
+        return view('headmaster.surat_masuk.index', compact('user', 'data', 'read', 'incoming', 'teacher', 'incomings', 'outgoing'));
     }
 
     public function getData($id, Request $request)

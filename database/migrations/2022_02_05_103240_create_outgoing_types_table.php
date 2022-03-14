@@ -16,6 +16,7 @@ class CreateOutgoingTypesTable extends Migration
         Schema::create('outgoing_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('number');
             $table->timestamps();
         });
     }

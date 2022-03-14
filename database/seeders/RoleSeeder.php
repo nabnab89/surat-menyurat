@@ -18,15 +18,41 @@ class RoleSeeder extends Seeder
             'Teacher',
             'Headmaster',
             'Admin',
-            // 'Student',
-            // 'Superadmin'
+            'Student',
+            'Superadmin'
         ];
 
-        foreach ($name as $data) {
+        $incoming = [
+            1,
+            1,
+            1,
+            0,
+            0
+        ];
+
+        $outgoing = [
+            1,
+            1,
+            1,
+            1,
+            0
+        ];
+
+        $disposition = [
+            0,
+            1,
+            1,
+            0,
+            0
+        ];
+        for ($i = 0; $i < count($name); $i++) {
             $user = Role::create([
-                'name'             => $data,
+                'name'          => $name[$i],
+                'incoming'      => $incoming[$i],
+                'outgoing'      => $outgoing[$i],
+                'disposition'      => $disposition[$i]
             ]);
             $user->save();
-        }
+        };
     }
 }

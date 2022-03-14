@@ -15,16 +15,32 @@ class OutgoingTypeSeeder extends Seeder
     public function run()
     {
         $name = [
-            'Surat Keterangan',
-            'Surat Pengusulan Kenaikan Pangkat',
+            'Surat Undangan',
             'Surat Pengusulan Pensiun',
+            'Surat Edaran',
+            'Surat Keterangan',
+            'Surat Mutasi',
+            'Surat Ijazah Belum Jadi',
+            'Surat Ijazah Hilang/Rusak',
+            'Surat Pindah Sekolah',
+        ];
+        $number = [
+            '005',
+            '006',
+            '007',
+            '422',
+            '009',
+            '010',
+            '011',
+            '012',
         ];
 
-        foreach ($name as $data) {
+        for ($i = 0; $i < count($name); $i++) {
             $user = OutgoingType::create([
-                'name'             => $data,
+                'name'             => $name[$i],
+                'number'           => $number[$i],
             ]);
             $user->save();
-        }
+        };
     }
 }

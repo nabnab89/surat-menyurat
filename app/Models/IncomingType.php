@@ -11,6 +11,7 @@ class IncomingType extends Model
 
     protected $fillable = [
         'name',
+        'number',
     ];
 
     protected $dates = [

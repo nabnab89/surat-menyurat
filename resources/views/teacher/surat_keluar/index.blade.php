@@ -13,6 +13,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/vendors/css/pickers/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/plugins/forms/pickers/form-flat-pickr.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/plugins/forms/pickers/form-pickadate.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/vendors/css/pickers/flatpickr/flatpickr.min.css">
     @csrf
 @endsection
 
@@ -49,9 +54,9 @@
                                 <th></th>
                                 <th></th>
                                 <th>ID</th>
-                                <th>Judul Surat</th>
-                                <th>Penerima</th>
-                                <th>Jenis Surat</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Kode Nomor Agenda</th>
+                                <th>Di Kirim Ke</th>
                                 <th>Surat</th>
                                 <th>Link Surat</th>
                                 <th>Status</th>
@@ -74,17 +79,14 @@
                     </div>
                     <div class="modal-body flex-grow-1">
                         <div class="mb-1">
-                            <label class="form-label" for="title">Judul Surat</label>
-                            <input type="text" class="form-control dt-full-name" id="title" name="title"
-                                placeholder="Surat Pengajuan Gol XXX/X" aria-label="Surat Pengajuan Gol xxx" />
+                            <label class="form-label" for="to">Di Kirim Ke</label>
+                            <input type="text" class="form-control dt-full-name" id="to" name="to" placeholder="Wali Murid"
+                                aria-label="Wali Murid" />
                         </div>
                         <div class="mb-1">
-                            <label class="form-label" for="id_admin">Penerima</label>
-                            <select class="select2" id="id_admin" name="id_admin">
-                                @foreach ($admin as $data_admin)
-                                    <option value={{ $data_admin->id }}>{{ $data_admin->name }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label" for="detail">Isi Pokok Surat</label>
+                            <textarea class="form-control" id="detail" name="detail" rows="3"
+                                placeholder="Textarea"></textarea>
                         </div>
                         <div class="mb-1">
                             <label class="form-label" for="id_type">Jenis Surat</label>
@@ -94,12 +96,71 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div id="undangan" class="">
+                            <hr>
+                            <div class="mb-1">Keperluan Surat
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="date">Tanggal</label>
+                                <input type="text" id="date" name="date" class="form-control flatpickr-range"
+                                    placeholder="YYYY-MM-DD to YYYY-MM-DD" />
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="time">Waktu</label>
+                                <input type="text" id="time" name="time" class="form-control flatpickr-time text-start"
+                                    placeholder="HH:MM" />
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="place">Tempat</label>
+                                <input type="text" class="form-control dt-full-name" id="place" name="place"
+                                    placeholder="SMP N 1 Slahung" aria-label="SMP N 1 Slahung" />
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label" for="necessary">Keperluan</label>
+                                <textarea class="form-control" id="necessary" name="necessary" rows="2"
+                                    placeholder="Textarea"></textarea>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary data-submit me-1">Submit</button>
                         <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
+        @foreach ($outgoing as $item)
+            <div class="modal fade" id="detail{{ $item->id }}" tabindex="-1" aria-labelledby="detailTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailTitle">Detail Surat</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <h5 class="mb-75">Tanggal Pengajuan</h5>
+                                <p class="card-text">{{ $item->date }}</p>
+                            </div>
+                            <div class="mt-2">
+                                <h5 class="mb-75">Kode Nomor Agenda</h5>
+                                <p class="card-text">{{ $item->number }}</p>
+                            </div>
+                            <div class="mt-2">
+                                <h5 class="mb-75">Di Kirim Ke</h5>
+                                <p class="card-text">{{ $item->to }}</p>
+                            </div>
+                            <div class="mt-2">
+                                <h5 class="mb-75">Isi Pokok Surat</h5>
+                                <p class="card-text">{{ $item->detail }}</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </section>
     <!--/ Basic table -->
 @endsection
@@ -120,5 +181,14 @@
     <script src="{{ asset('assets') }}/vendors/js/tables/datatable/buttons.print.min.js"></script>
     <script src="{{ asset('assets') }}/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
     <script src="{{ asset('assets') }}/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+
+    <script src="{{ asset('assets') }}/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="{{ asset('assets') }}/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="{{ asset('assets') }}/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="{{ asset('assets') }}/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="{{ asset('assets') }}/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <script src="{{ asset('assets') }}/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <script src="{{ asset('assets') }}/js/scripts/forms/pickers/form-pickers.js"></script>
+
     <script src="{{ asset('assets/js/scripts/tables/teacher/table-teacher-outgoing-datatables.js') }}"></script>
 @endsection

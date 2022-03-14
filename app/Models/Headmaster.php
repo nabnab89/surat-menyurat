@@ -13,6 +13,8 @@ class Headmaster extends Model
         'name',
         'nip',
         'id_user',
+        'rank',
+        'class'
     ];
 
     protected $dates = [
@@ -29,10 +31,5 @@ class Headmaster extends Model
     public function incoming()
     {
         return $this->hasMany(Incoming::class, 'id_headmaster');
-    }
-
-    public function outgoing()
-    {
-        return $this->hasMany(Outgoing::class, 'id_headmaster');
     }
 }

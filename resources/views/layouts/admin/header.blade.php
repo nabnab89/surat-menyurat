@@ -79,16 +79,18 @@
                 <li class="nav-item dropdown dropdown-notification me-25">
                     <a class="nav-link" href="#" data-bs-toggle="dropdown">
                         <i class="ficon" data-feather="bell"></i>
-                        @if ($incoming->count != 0)
-                            <span class="badge rounded-pill bg-danger badge-up">{{ $incoming->count }}</span>
+                        @if ($incoming->count != 0 || $outgoing->count != 0)
+                            <span
+                                class="badge rounded-pill bg-danger badge-up">{{ $incoming->count + $outgoing->count }}</span>
                         @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
                         <li class="dropdown-menu-header">
                             <div class="dropdown-header d-flex">
                                 <h4 class="notification-title mb-0 me-auto">Notifikasi</h4>
-                                @if ($incoming->count != 0)
-                                    <div class="badge rounded-pill badge-light-primary">{{ $incoming->count }} New
+                                @if ($incoming->count != 0 || $outgoing->count != 0)
+                                    <div class="badge rounded-pill badge-light-primary">
+                                        {{ $incoming->count + $outgoing->count }} New
                                     </div>
                                 @endif
                             </div>
@@ -106,9 +108,122 @@
                                         </div>
                                         <div class="list-item-body flex-grow-1">
                                             <p class="media-heading"><span class="fw-bolder">Terdapat
-                                                    {{ $incoming->count }} surat baru</p>
-                                            <small class="notification-text"> Silahkan dibuka pada menu surat
+                                                    {{ $incoming->count }} surat masuk baru</p>
+                                            <small class="notification-text"> Silahkan dibuka pada menu surat masuk
                                                 baru</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            @else
+                                <a class="d-flex" href="#">
+                                    <div class="list-item d-flex align-items-start">
+                                        <div class="me-1">
+                                            <div class="avatar bg-light-success">
+                                                <div class="avatar-content">
+                                                    <i class="avatar-icon" data-feather="check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-item-body flex-grow-1">
+                                            <p class="media-heading">
+                                                <span class="fw-bolder">Tidak ada surat masuk baru
+                                            </p>
+                                            <small class="notification-text">Saat ini belum ada surat masuk baru untuk
+                                                anda</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endif
+                        </li>
+                        <li class="scrollable-container media-list">
+                            @if ($outgoing->count != 0)
+                                <a class="d-flex" href="#">
+                                    <div class="list-item d-flex align-items-start">
+                                        <div class="me-1">
+                                            <div class="avatar bg-light-info">
+                                                <div class="avatar-content">
+                                                    <i class="avatar-icon" data-feather="file-text"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-item-body flex-grow-1">
+                                            <p class="media-heading"><span class="fw-bolder">Terdapat
+                                                    {{ $outgoing->count }} surat keluar baru</p>
+                                            <small class="notification-text"> Silahkan dibuka pada menu surat keluar
+                                                baru</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            @else
+                                <a class="d-flex" href="#">
+                                    <div class="list-item d-flex align-items-start">
+                                        <div class="me-1">
+                                            <div class="avatar bg-light-success">
+                                                <div class="avatar-content">
+                                                    <i class="avatar-icon" data-feather="check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-item-body flex-grow-1">
+                                            <p class="media-heading">
+                                                <span class="fw-bolder">Tidak ada surat keluar baru
+                                            </p>
+                                            <small class="notification-text">Saat ini belum ada surat keluar baru untuk
+                                                anda</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endif
+                        </li>
+                        @if ($incoming->count != 0 || $outgoing->count != 0)
+                            <li class="dropdown-menu-footer">
+                                <div class="row justify-content-between mx-1">
+                                    <a class="btn btn-primary col-5"
+                                        href="{{ route('headmaster.suratmasuk.index') }}">
+                                        Surat Masuk</a>
+                                    <a class="btn btn-primary col-5"
+                                        href="{{ route('headmaster.suratkeluar.index') }}">
+                                        Surat Keluar</a>
+                                </div>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
+            @if ($user->id_role == 3)
+                <li class="nav-item dropdown dropdown-notification me-25">
+                    <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                        <i class="ficon" data-feather="bell"></i>
+                        @if ($count != 0)
+                            <span class="badge rounded-pill bg-danger badge-up">{{ $count }}</span>
+                        @endif
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
+                        <li class="dropdown-menu-header">
+                            <div class="dropdown-header d-flex">
+                                <h4 class="notification-title mb-0 me-auto">Notifikasi</h4>
+                                @if ($count != 0)
+                                    <div class="badge rounded-pill badge-light-primary">{{ $count }} New
+                                    </div>
+                                @endif
+                            </div>
+                        </li>
+                        <li class="scrollable-container media-list">
+                            @if ($count != 0)
+                                <a class="d-flex" href="#">
+                                    <div class="list-item d-flex align-items-start">
+                                        <div class="me-1">
+                                            <div class="avatar bg-light-warning">
+                                                <div class="avatar-content">
+                                                    <i class="avatar-icon" data-feather="file-text"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-item-body flex-grow-1">
+                                            <p class="media-heading"><span class="fw-bolder">Terdapat
+                                                    {{ $count }} surat perlu diverifikasi</p>
+                                            <small class="notification-text"> Silahkan dibuka pada menu surat
+                                                keluar</small>
                                         </div>
                                     </div>
                                 </a>
@@ -133,21 +248,53 @@
                                 </a>
                             @endif
                         </li>
-                        @if ($incoming->count != 0)
+                        @if ($count != 0)
                             <li class="dropdown-menu-footer">
-                                <a class="btn btn-primary w-100"
-                                    href="{{ route('headmaster.suratmasuk.index') }}">Buka
+                                <a class="btn btn-primary w-100" href="{{ route('admin.suratkeluar.index') }}">Buka
                                     Surat</a>
                             </li>
                         @endif
                     </ul>
                 </li>
             @endif
-            @if ($user->id_role == 3)
+            @if ($user->id_role == 4)
                 <li class="nav-item dropdown dropdown-notification me-25">
                     <a class="nav-link" href="#" data-bs-toggle="dropdown">
                         <i class="ficon" data-feather="bell"></i>
-                        <span class="badge rounded-pill bg-danger badge-up">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
+                        <li class="dropdown-menu-header">
+                            <div class="dropdown-header d-flex">
+                                <h4 class="notification-title mb-0 me-auto">Notifikasi</h4>
+                            </div>
+                        </li>
+                        <li class="scrollable-container media-list">
+                            <a class="d-flex" href="#">
+                                <div class="list-item d-flex align-items-start">
+                                    <div class="me-1">
+                                        <div class="avatar bg-light-success">
+                                            <div class="avatar-content">
+                                                <i class="avatar-icon" data-feather="check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-item-body flex-grow-1">
+                                        <p class="media-heading">
+                                            <span class="fw-bolder">Tidak ada surat baru
+                                        </p>
+                                        <small class="notification-text">Saat ini belum ada surat baru untuk
+                                            anda</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            @if ($user->id_role == 5)
+                <li class="nav-item dropdown dropdown-notification me-25">
+                    <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                        <i class="ficon" data-feather="bell"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
                         <li class="dropdown-menu-header">
@@ -210,6 +357,28 @@
                         </div>
                         <span class="avatar bg-light-primary">
                             <span class="avatar-content">{{ substr($user->admin->name, 0, 1) }}</span>
+                            <span class="avatar-status-online">
+                            </span>
+                        </span>
+                    @endif
+                    @if ($user->id_role == 4)
+                        <div class="user-nav d-sm-flex d-none">
+                            <span class="user-name fw-bolder">{{ $user->student->name }}</span>
+                            <span class="user-status">Siswa</span>
+                        </div>
+                        <span class="avatar bg-light-primary">
+                            <span class="avatar-content">{{ substr($user->student->name, 0, 1) }}</span>
+                            <span class="avatar-status-online">
+                            </span>
+                        </span>
+                    @endif
+                    @if ($user->id_role == 5)
+                        <div class="user-nav d-sm-flex d-none">
+                            <span class="user-name fw-bolder">{{ $user->superadmin->name }}</span>
+                            <span class="user-status">Superadmin</span>
+                        </div>
+                        <span class="avatar bg-light-primary">
+                            <span class="avatar-content">{{ substr($user->superadmin->name, 0, 1) }}</span>
                             <span class="avatar-status-online">
                             </span>
                         </span>

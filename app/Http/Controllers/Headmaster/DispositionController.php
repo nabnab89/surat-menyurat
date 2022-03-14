@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Headmaster;
 use App\Http\Controllers\Controller;
 use App\Models\Disposition;
 use App\Models\Incoming;
+use App\Models\Outgoing;
 use App\Models\Teacher;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -25,7 +26,9 @@ class DispositionController extends Controller
         $not_acc = url('headmaster/disposisi/not_acc');
         $disposition = Disposition::all();
         $teacher = Teacher::all();
-        return view('headmaster.disposisi.index', compact('user', 'data', 'read', 'incoming', 'acc', 'not_acc', 'disposition', 'teacher'));
+        $outgoing = Outgoing::where('status', '>=', 2)->get();
+        $outgoing->count = count($outgoing->where('status', 2));
+        return view('headmaster.disposisi.index', compact('user', 'data', 'read', 'incoming', 'acc', 'not_acc', 'disposition', 'teacher', 'outgoing'));
     }
 
     public function getData($id, Request $request)

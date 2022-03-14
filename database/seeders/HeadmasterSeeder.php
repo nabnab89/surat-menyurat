@@ -15,18 +15,22 @@ class HeadmasterSeeder extends Seeder
     public function run()
     {
         $name = [
-            'Puji Rahayu',
-            'Rudi Gunawan',
+            'Riduwan, S.Pd, M.Pd',
         ];
 
         $id_user = [
             '3',
-            '4',
         ];
 
         $nip = [
-            '193307003',
-            '193307004',
+            '19661015 199001 1 002',
+        ];
+
+        $rank = [
+            'Pembina Tk.1',
+        ];
+        $class = [
+            'IV/b',
         ];
 
 
@@ -35,6 +39,8 @@ class HeadmasterSeeder extends Seeder
                 'name'             => $name[$i],
                 'id_user'          => $id_user[$i],
                 'nip'              => $nip[$i],
+                'rank'              => $rank[$i],
+                'class'              => $class[$i],
             ]);
             $user->save();
         };

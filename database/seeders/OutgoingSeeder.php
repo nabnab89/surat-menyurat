@@ -14,39 +14,61 @@ class OutgoingSeeder extends Seeder
      */
     public function run()
     {
-        $title = [
-            'Surat Pengajuan Gol III/a',
-            'Surat Keterangan Cuti Hamil',
+        $detail = [
+            'Surat Undangan Komite',
+            'Surat Undangan Pengambilan Rapot',
+            'Surat Keterangan Rekomendasi',
+        ];
+
+        $number = [
+            '005/001/405.07.3.23/2022',
+            '005/002/405.07.3.23/2022',
+            '422/003/405.07.3.23/2022',
+        ];
+
+        $to = [
+            'Pengurus Komite',
+            'Wali Muri',
+            'Syadhach Amaliya',
         ];
 
         $letter = [
             asset('assets/test.pdf'),
+            asset('assets/test.pdf'),
+            asset('assets/surat_keterangan.pdf'),
         ];
 
         $id_type = [
-            2,
-            1
-        ];
-
-        $id_admin = [
             1,
+            1,
+            4
         ];
 
         $id_teacher = [
             1,
+            2,
+            null
+        ];
+
+        $id_student = [
+            null,
+            null,
+            1
         ];
 
         $status = [
             0,
         ];
 
-        for ($i = 0; $i < count($title); $i++) {
+        for ($i = 0; $i < count($detail); $i++) {
             $user = Outgoing::create([
-                'title'             => $title[$i],
-                'letter'            => $letter[0],
+                'detail'            => $detail[$i],
+                'number'            => $number[$i],
+                'to'                => $to[$i],
+                'letter'            => $letter[$i],
                 'id_type'           => $id_type[$i],
-                'id_admin'          => $id_admin[0],
-                'id_teacher'        => $id_teacher[0],
+                'id_teacher'        => $id_teacher[$i],
+                'id_student'        => $id_student[$i],
                 'status'            => $status[0],
             ]);
             $user->save();

@@ -19,18 +19,20 @@ class UserSeeder extends Seeder
             'teacher@teacher.com',
             'teacher2@teacher2.com',
             'headmaster@headmaster.com',
-            'headmaster2@headmaster2.com',
             'admin@admin.com',
             'admin2@admin2.com',
+            'student@student.com',
+            'superadmin@superadmin.com'
         ];
 
         $role = [
             '1',
             '1',
             '2',
-            '2',
             '3',
-            '3'
+            '3',
+            '4',
+            '5'
         ];
 
         for ($i = 0; $i < count($email); $i++) {
