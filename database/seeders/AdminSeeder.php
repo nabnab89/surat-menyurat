@@ -29,12 +29,18 @@ class AdminSeeder extends Seeder
             '193307006',
         ];
 
+        $status = [
+            1,
+            0,
+        ];
+
 
         for ($i = 0; $i < count($name); $i++) {
             $user = Admin::create([
-                'name'             => $name[$i],
-                'id_user'          => $id_user[$i],
-                'nip'              => $nip[$i],
+                'name'              => $name[$i],
+                'id_user'           => $id_user[$i],
+                'nip'               => $nip[$i],
+                'status'            => $status[$i],
             ]);
             $user->save();
         };

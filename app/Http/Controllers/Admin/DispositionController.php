@@ -10,6 +10,7 @@ use App\Models\Outgoing;
 use App\Models\OutgoingType;
 use App\Models\Role;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -28,7 +29,8 @@ class DispositionController extends Controller
         $teacher = Teacher::all();
         $outgoing = Outgoing::all();
         $count = count($outgoing->where('status', 0));
-        return view('admin.disposition.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete', 'count'));
+        $disposition = Disposition::all();
+        return view('admin.disposition.index', compact('user', 'data', 'read', 'role', 'type', 'headmaster', 'teacher', 'delete', 'count', 'disposition'));
     }
 
     public function getData(Request $request)
@@ -76,5 +78,17 @@ class DispositionController extends Controller
     {
         $surat = Disposition::where('id', $id)->first();
         return redirect()->to($surat->letter);
+    }
+
+    public function upload($id, Request $request)
+    {
+        $now = Carbon::now()->format('dmYHis');
+        $filename = $now . '.pdf';
+        $file = $request->file('letter');
+        $file->move(public_path('assets/report/disposition'), $filename);
+        $disposition = Disposition::find($id);
+        $disposition->letter = asset('assets/report/disposition/' . $filename);
+        $disposition->save();
+        return redirect()->back();
     }
 }

@@ -187,17 +187,6 @@ $(document).ready(function () {
                             $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex');
                         }, 50);
                     }
-                },
-                {
-                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Tambah Data',
-                    className: 'create-new btn btn-primary',
-                    attr: {
-                        'data-bs-toggle': 'modal',
-                        'data-bs-target': '#modals-slide-in'
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                    }
                 }
             ],
             responsive: {

@@ -353,7 +353,7 @@
                     @if ($user->id_role == 3)
                         <div class="user-nav d-sm-flex d-none">
                             <span class="user-name fw-bolder">{{ $user->admin->name }}</span>
-                            <span class="user-status">Admin</span>
+                            <span class="user-status">{{ $user->admin->status == 1 ? 'Kepala TU' : 'Admin' }}</span>
                         </div>
                         <span class="avatar bg-light-primary">
                             <span class="avatar-content">{{ substr($user->admin->name, 0, 1) }}</span>

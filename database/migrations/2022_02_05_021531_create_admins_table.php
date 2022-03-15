@@ -18,6 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->integer('nip')->unique();
             $table->integer('id_user')->unsigned();
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
 

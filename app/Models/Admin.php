@@ -13,6 +13,7 @@ class Admin extends Model
         'name',
         'nip',
         'id_user',
+        'status'
     ];
 
     protected $dates = [

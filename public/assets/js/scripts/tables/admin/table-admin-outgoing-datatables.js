@@ -102,8 +102,9 @@ $(document).ready(function () {
                     title: 'Actions',
                     orderable: false,
                     render: function (data, type, full, meta) {
-                        return (
-                            '<div class="d-inline-flex">' +
+                        var status = full['admin'];
+                        console.log(status);
+                        const head = '<div class="d-inline-flex">' +
                             '<a class="pe-1 dropdown-toggle hide-arrow text-primary" data-bs-toggle="dropdown">' +
                             feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
                             '</a>' +
@@ -124,12 +125,39 @@ $(document).ready(function () {
                             'Tidak Terverifikasi</a>' +
                             '</div>' +
                             '</div>' +
-                            '<a href="" class="item-edit" data-bs-toggle="modal" data-bs-target="#detail' +
+                            '<a href="" class="item-edit pe-1" data-bs-toggle="modal" data-bs-target="#detail' +
                             data +
                             '">' +
                             feather.icons['info'].toSvg({ class: 'font-small-4' }) +
-                            '</a>'
-                        );
+                            '</a>' +
+                            '<a href="" class="item-edit" data-bs-toggle="modal" data-bs-target="#update' +
+                            data +
+                            '">' +
+                            feather.icons['plus-circle'].toSvg({ class: 'font-small-4' }) +
+                            '</a>';
+
+                        const nonhaead = '<div class="d-inline-flex">' +
+                            '<a href="" class="item-edit pe-1" data-bs-toggle="modal" data-bs-target="#detail' +
+                            data +
+                            '">' +
+                            feather.icons['info'].toSvg({ class: 'font-small-4' }) +
+                            '</a>' +
+                            '<a href="" class="item-edit" data-bs-toggle="modal" data-bs-target="#update' +
+                            data +
+                            '">' +
+                            feather.icons['plus-circle'].toSvg({ class: 'font-small-4' }) +
+                            '</a>';
+
+                        if (status == 1) {
+                            return (
+                                head
+                            );
+                        } else {
+                            return (
+                                nonhaead
+                            );
+                        }
+
                     }
                 }
             ],

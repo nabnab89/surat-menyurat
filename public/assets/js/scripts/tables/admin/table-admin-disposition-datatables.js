@@ -127,14 +127,18 @@ $(document).ready(function () {
                     title: 'Actions',
                     orderable: false,
                     render: function (data, type, full, meta) {
+                        var id = full['id'];
                         return (
-                            '<div class="d-inline-flex">' +
                             '<a href="' +
                             data +
-                            '" class="item-edit" target="_blank">' +
+                            '" class="item-edit pe-1" target="_blank">' +
                             feather.icons['printer'].toSvg({ class: 'font-small-4' }) +
                             '</a>' +
-                            '</div>'
+                            '<a href="" class="item-edit" data-bs-toggle="modal" data-bs-target="#update' +
+                            id +
+                            '">' +
+                            feather.icons['plus-circle'].toSvg({ class: 'font-small-4' }) +
+                            '</a>'
                         );
                     }
                 }

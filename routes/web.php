@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/read/{id}', [TSuratKeluarController::class, 'read'])->name('teacher.suratkeluar.read');
                 Route::get('/delete/{id}', [TSuratKeluarController::class, 'delete'])->name('teacher.suratkeluar.delete');
                 Route::post('/create', [TSuratKeluarController::class, 'create'])->name('teacher.suratkeluar.create');
+                Route::post('/upload/{id}', [TSuratKeluarController::class, 'upload'])->name('teacher.suratkeluar.upload');
             });
         });
     });
@@ -75,11 +76,13 @@ Route::middleware(['auth'])->group(function () {
             Route::prefix('disposisi')->group(function () {
                 Route::get('/index', [ADispositionController::class, 'index'])->name('admin.disposisi.index');
                 Route::get('/read/{id}', [ADispositionController::class, 'read'])->name('admin.disposisi.read');
+                Route::post('/upload/{id}', [ADispositionController::class, 'upload'])->name('admin.disposisi.upload');
             });
             Route::prefix('surat-keluar')->group(function () {
                 Route::get('/index', [ASuratKeluarController::class, 'index'])->name('admin.suratkeluar.index');
                 Route::get('/acc/{id}', [ASuratKeluarController::class, 'acc'])->name('admin.suratkeluar.acc');
                 Route::get('/not_acc/{id}', [ASuratKeluarController::class, 'not_acc'])->name('admin.suratkeluar.not_acc');
+                Route::post('/upload/{id}', [ASuratKeluarController::class, 'upload'])->name('admin.suratkeluar.upload');
             });
         });
     });

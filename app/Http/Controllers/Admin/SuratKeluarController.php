@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Outgoing;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -16,7 +17,7 @@ class SuratKeluarController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data = url('api/admin/surat-keluar/index/get');
+        $data = url('api/admin/surat-keluar/index/get', $user->admin->id);
         $acc = url('admin/surat-keluar/acc');
         $not_acc = url('admin/surat-keluar/not_acc');
         $outgoing = Outgoing::all();
@@ -35,9 +36,10 @@ class SuratKeluarController extends Controller
         return view('admin.surat_keluar.index', compact('user', 'data', 'acc', 'not_acc', 'outgoing', 'count'));
     }
 
-    public function getData(Request $request)
+    public function getData($id, Request $request)
     {
         if ($request->ajax()) {
+            $admin = Admin::find($id);
             $data = Outgoing::all();
             foreach ($data as $value) {
                 $date = substr($value->created_at, 0, 10);
@@ -49,12 +51,14 @@ class SuratKeluarController extends Controller
                     $student = Student::find($value->id_student);
                     $value->sender = $student->name;
                 }
+                $value->admin = $admin->status;
                 $value->type;
                 $value->responsive_id = "";
             }
             return DataTables::of($data)
                 ->make(true);
         } else {
+            $admin = Admin::find($id);
             $data = Outgoing::all();
             foreach ($data as $value) {
                 $date = substr($value->created_at, 0, 10);
@@ -66,6 +70,7 @@ class SuratKeluarController extends Controller
                     $student = Student::find($value->id_student);
                     $value->sender = $student->name;
                 }
+                $value->admin = $admin->status;
                 $value->type;
                 $value->responsive_id = "";
             }
@@ -87,6 +92,18 @@ class SuratKeluarController extends Controller
         $surat = Outgoing::where('id', $id)->first();
         $surat->status = 1;
         $surat->save();
+        return redirect()->back();
+    }
+
+    public function upload($id, Request $request)
+    {
+        $now = Carbon::now()->format('dmYHis');
+        $filename = $now . '.pdf';
+        $file = $request->file('letter');
+        $file->move(public_path('assets/report/outgoing'), $filename);
+        $outgoing = Outgoing::find($id);
+        $outgoing->letter = asset('assets/report/outgoing/' . $filename);
+        $outgoing->save();
         return redirect()->back();
     }
 }

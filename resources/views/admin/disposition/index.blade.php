@@ -62,6 +62,28 @@
         </div>
     </section>
     <!--/ Basic table -->
+    @foreach ($disposition as $item)
+        <div class="modal modal-slide-in fade" id="update{{ $item->id }}">
+            <div class="modal-dialog sidebar-sm">
+                <form class="add-new-record modal-content pt-0" method="POST"
+                    action="{{ route('admin.disposisi.upload', $item->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                    <div class="modal-header mb-1">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Baru</h5>
+                    </div>
+                    <div class="modal-body flex-grow-1">
+                        <div class="mb-1">
+                            <label class="form-label" for="letter">Scan Surat</label>
+                            <input class="form-control" type="file" id="letter" name="letter">
+                        </div>
+                        <button type="submit" class="btn btn-primary data-submit me-1">Submit</button>
+                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @section('script')
